@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 
+// Initialize fonts
 const inter = localFont({
   src: "./fonts/InterVF.ttf",
   variable: "--font-inter",
@@ -14,6 +16,7 @@ const spaceGrotesk = localFont({
   weight: "variable",
 });
 
+// Initialize metadata
 export const metadata: Metadata = {
   title: "Devflow",
   description:
@@ -23,18 +26,26 @@ export const metadata: Metadata = {
   },
 };
 
+// Root layout component that wraps the entire application
+// - Renders child components within the layout
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body
-        suppressHydrationWarning={true}
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
