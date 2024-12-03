@@ -6,6 +6,9 @@
   body {
     @apply font-inter; /* Sets Inter as the default font */
   }
+  :root {
+    --radius: 0.5rem;
+  }
 }
 
 :root {
