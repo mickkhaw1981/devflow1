@@ -22,7 +22,9 @@ const Navbar = () => {
 
       <p>Global Search</p>
 
-      <div className="flex-between gap-5">Theme</div>
+      <div className="flex-between gap-5">
+        <Theme />
+      </div>
     </nav>
   );
 };
