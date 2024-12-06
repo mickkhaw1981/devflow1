@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 import React from "react";
 
+import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import { signIn } from "~/auth";
-
-import { Button } from "../ui/button";
+import ROUTES from "~/constants/routes";
 
 const SocialAuthForm = () => {
   const buttonClass =
@@ -14,13 +14,18 @@ const SocialAuthForm = () => {
 
   const handleSignIn = async (provider: "github" | "google") => {
     try {
-      throw new Error("Not implemented");
-      // await signIn(provider);
+      await signIn(provider, {
+        callbackUrl: ROUTES.HOME,
+      });
     } catch (error) {
-      console.error(error);
+      console.log(error);
+
       toast({
-        title: "Something went wrong",
-        description: "Please try again",
+        title: "Sign-in Failed",
+        description:
+          error instanceof Error
+            ? error.message
+            : "An error occured during sign-in",
         variant: "destructive",
       });
     }
