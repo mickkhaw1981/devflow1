@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 
-import Navbar from "@/components/navigation/navbar";
+import { Toaster } from "@/components/ui/toaster";
 
 // Initialize fonts
 const inter = localFont({
@@ -48,6 +48,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
