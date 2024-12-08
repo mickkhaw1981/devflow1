@@ -35,9 +35,8 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 // Root layout component that wraps the entire application
-
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
-  // Force headers to be called within request scope
+  // Retrive the current request headers
   headers();
   const session = await auth();
 
