@@ -10,7 +10,6 @@ const Home = async () => {
     <main className="flex min-h-screen flex-col items-center justify-center gap-8">
       <h1 className="font-space-grotesk text-8xl font-bold">Hello world</h1>
       <h1 className="text-8xl font-bold">Hello world</h1>
-      {/* add a form with a button for log out */}
       <form
         className="px-10 pt-[100px]"
         action={async () => {
@@ -18,7 +17,7 @@ const Home = async () => {
           await signOut({ redirectTo: ROUTES.SIGN_IN });
         }}
       >
-        <Button type="submit">Log out</Button>
+        <Button type="submit">Log Out</Button>
       </form>
     </main>
   );
