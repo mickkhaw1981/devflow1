@@ -1,10 +1,15 @@
-import { NextConfig } from "next";
+import type { NextConfig } from "next";
 
-const config: NextConfig = {
-  webpack: (config) => {
-    config.resolve.alias["~"] = __dirname;
-    return config;
+const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "static.vecteezy.com",
+        port: "",
+      },
+    ],
   },
 };
 
-export default config;
+export default nextConfig;
