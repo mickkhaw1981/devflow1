@@ -46,22 +46,30 @@ const AuthForm = <T extends FieldValues>({
   });
 
   const handleSubmit: SubmitHandler<T> = async (data) => {
-    const result = (await onSubmit(data)) as ActionResponse;
+    try {
+      const result = await onSubmit(data);
 
-    if (result?.success) {
-      toast({
-        title: "Success",
-        description:
-          formType === "SIGN_IN"
-            ? "Signed in successfully"
-            : "Signed up successfully",
-      });
+      if (result?.success) {
+        toast({
+          title: "Success",
+          description:
+            formType === "SIGN_IN"
+              ? "Signed in successfully"
+              : "Signed up successfully",
+        });
 
-      router.push(ROUTES.HOME);
-    } else {
+        router.push(ROUTES.HOME);
+      } else {
+        toast({
+          title: `Error ${result?.status}`,
+          description: result?.error?.message,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
       toast({
-        title: `Error ${result?.status}`,
-        description: result?.error?.message,
+        title: "Error",
+        description: "An unexpected error occurred",
         variant: "destructive",
       });
     }
