@@ -256,6 +256,9 @@ export async function getQuestions(
   const skip = (Number(page) - 1) * pageSize;
   const limit = Number(pageSize);
 
+  // Initialize an empty MongoDB filter query object that will be used to filter Question documents
+  // FilterQuery is a TypeScript type from Mongoose that ensures type safety for query conditions
+  // typeof Question refers to the Question model's type
   const filterQuery: FilterQuery<typeof Question> = {};
 
   if (filter === "recommended") {
@@ -273,6 +276,7 @@ export async function getQuestions(
 
   switch (filter) {
     case "newest":
+      // -1 means descending order (newest to oldest), 1 would mean ascending order (oldest to newest)
       sortCriteria = { createdAt: -1 };
       break;
     case "unanswered":
