@@ -1,6 +1,6 @@
 "use server";
 
-import mongoose, { FilterQuery } from "mongoose";
+import mongoose, { Error, FilterQuery } from "mongoose";
 
 import Question, { IQuestionDoc } from "~/database/question.model";
 import TagQuestion from "~/database/tag-question.model";
@@ -18,6 +18,10 @@ import {
 export async function createQuestion(
   params: CreateQuestionParams
 ): Promise<ActionResponse<Question>> {
+  // Validates the question parameters and checks user authorization
+  // - Validates title, content and tags using AskQuestionSchema
+  // - Ensures user is authenticated via authorize:true
+  // - Returns validation result or error if validation fails
   const validationResult = await action({
     params,
     schema: AskQuestionSchema,
@@ -28,8 +32,16 @@ export async function createQuestion(
     return handleError(validationResult) as ErrorResponse;
   }
 
-  const { title, content, tags } = validationResult.params!;
-  const userId = validationResult?.session?.user?.id;
+  // Type assertion and destructuring of validation result
+  // - Asserts the shape of validationResult to include params (title, content, tags) and session (user id)
+  // - Extracts question params (title, content, tags) from result.params
+  // - Gets the authenticated user ID from result.session
+  const result = validationResult as {
+    params: { title: string; content: string; tags: string[] };
+    session: { user: { id: string } };
+  };
+  const { title, content, tags } = result.params;
+  const userId = result.session.user.id;
 
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -93,8 +105,17 @@ export async function editQuestion(
     return handleError(validationResult) as ErrorResponse;
   }
 
-  const { title, content, tags, questionId } = validationResult.params!;
-  const userId = validationResult?.session?.user?.id;
+  const result = validationResult as {
+    params: {
+      title: string;
+      content: string;
+      tags: string[];
+      questionId: string;
+    };
+    session: { user: { id: string } };
+  };
+  const { title, content, tags, questionId } = result.params;
+  const userId = result.session.user.id;
 
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -200,7 +221,11 @@ export async function getQuestion(
     return handleError(validationResult) as ErrorResponse;
   }
 
-  const { questionId } = validationResult.params!;
+  const result = validationResult as {
+    params: { questionId: string };
+    session: null | { user: { id: string } };
+  };
+  const { questionId } = result.params;
 
   try {
     const question = await Question.findById(questionId).populate("tags");
