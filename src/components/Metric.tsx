@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 interface Props {
-  imgUrl: string;
+  imgUrl: string | null;
   alt: string;
   value: string | number;
   title: string;
@@ -23,15 +23,33 @@ const Metric = ({
   imgStyles,
   isAuthor,
 }: Props) => {
+  const initials = alt
+    .split(" ")
+    .map((word: string) => word[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+
   const metricContent = (
     <>
-      <Image
-        src={imgUrl}
-        width={16}
-        height={16}
-        alt={alt}
-        className={`rounded-full object-contain ${imgStyles}`}
-      />
+      {/* implemented custom avatar logic */}
+      {imgUrl ? (
+        <Image
+          src={imgUrl}
+          width={16}
+          height={16}
+          alt={alt}
+          className={`rounded-full object-contain ${imgStyles}`}
+        />
+      ) : (
+        <div
+          className={`primary-gradient flex h-4 w-4 items-center justify-center rounded-full ${imgStyles}`}
+        >
+          <span className="text-[8px] font-bold text-light-900">
+            {initials}
+          </span>
+        </div>
+      )}
 
       <p className={`${textStyles} flex items-center gap-1`}>
         {value}

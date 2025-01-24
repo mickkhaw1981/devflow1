@@ -106,7 +106,8 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
             description: "Question updated successfully",
           });
 
-          if (result.data) router.push(ROUTES.QUESTION(result.data._id));
+          if (result.data)
+            router.push(ROUTES.QUESTION(result.data._id as string));
         } else {
           toast({
             title: `Error ${result.status}`,
@@ -126,7 +127,8 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
           description: "Question created successfully",
         });
 
-        if (result.data) router.push(ROUTES.QUESTION(result.data._id));
+        if (result.data)
+          router.push(ROUTES.QUESTION(result.data._id as string));
       } else {
         toast({
           title: `Error ${result.status}`,
@@ -242,7 +244,7 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
                 <span>Submitting</span>
               </>
             ) : (
-              <>{isEdit ? "Edit" : "Ask a Question"}</>
+              <>{isEdit ? "Save" : "Ask a Question"}</>
             )}
           </Button>
         </div>
