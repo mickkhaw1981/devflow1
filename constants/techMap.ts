@@ -196,3 +196,51 @@ export const techMap: { [key: string]: string } = {
   // Three.js
   threejs: "devicon-threejs-original",
 };
+
+export const techDescriptionMap: { [key: string]: string } = {
+  // JavaScript
+  javascript:
+    "JavaScript is a powerful language for building dynamic, interactive, and modern web applications.",
+  js: "JavaScript is a powerful language for building dynamic, interactive, and modern web applications.",
+  // TypeScript
+  typescript:
+    "TypeScript adds strong typing to JavaScript, making it great for scalable and maintainable applications.",
+  // React
+  react:
+    "React is a popular JavaScript library for building user interfaces with reusable components.",
+  // Next.js
+  nextjs:
+    "Next.js is a React framework for building server-side rendered and statically generated web applications.",
+  next: "Next.js is a React framework for building server-side rendered and statically generated web applications.",
+  // Node.js
+  nodejs:
+    "Node.js is a runtime environment for executing JavaScript code on the server side.",
+  node: "Node.js is a runtime environment for executing JavaScript code on the server side.",
+  // Python
+  python:
+    "Python is a versatile programming language popular for web development, data science, AI, and automation.",
+  // Java
+  java: "Java is a robust, object-oriented programming language widely used for enterprise applications.",
+  // C++
+  cpp: "C++ is a powerful programming language used for system-level programming, game development, and performance-critical applications.",
+  cplusplus:
+    "C++ is a powerful programming language used for system-level programming, game development, and performance-critical applications.",
+  // Git
+  git: "Git is a version control system for tracking changes in source code during software development.",
+  // Docker
+  docker:
+    "Docker is a platform for containerizing applications, making them portable and efficient to deploy.",
+  // MongoDB
+  mongodb:
+    "MongoDB is a NoSQL database known for its flexibility and scalability in handling large datasets.",
+  // MySQL
+  mysql:
+    "MySQL is a widely-used relational database management system for structured data storage and retrieval.",
+  // PostgreSQL
+  postgresql:
+    "PostgreSQL is an advanced, open-source relational database system with powerful features.",
+  postgres:
+    "PostgreSQL is an advanced, open-source relational database system with powerful features.",
+  // AWS
+  aws: "AWS (Amazon Web Services) is a cloud platform offering scalable infrastructure and services for various applications.",
+};

@@ -61,7 +61,7 @@ export const getTags = async (
     const totalTags = await Tag.countDocuments(filterQuery);
 
     // Find the tags that match the filter query, sort them, skip the appropriate number of tags, and limit the results to the page size
-    ///Example URL: .../tags?query=react&filter=popular&page=1&pageSize=10
+    ///Exampleapi/tags?query=react&filter=popular&page=1&pageSize=10
     const tags = await Tag.find(filterQuery)
       .sort(sortCriteria)
       .skip(skip)

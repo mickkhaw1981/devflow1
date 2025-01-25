@@ -11,6 +11,7 @@ interface RemoveUrlQueryParams {
   keysToRemove: string[];
 }
 
+// formUrlQuery is a function that takes a params object and returns a new URL with the specified key and value added to the query string
 export const formUrlQuery = ({ params, key, value }: UrlQueryParams) => {
   const queryString = qs.parse(params);
 
@@ -22,6 +23,7 @@ export const formUrlQuery = ({ params, key, value }: UrlQueryParams) => {
   });
 };
 
+// removeKeysFromUrlQuery is a function that takes a params object and returns a new URL with the specified keys removed from the query string
 export const removeKeysFromUrlQuery = ({
   params,
   keysToRemove,
