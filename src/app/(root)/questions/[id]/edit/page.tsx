@@ -6,8 +6,14 @@ import QuestionForm from "@/components/forms/QuestionForm";
 import { getQuestion } from "@/lib/actions/question.action";
 import ROUTES from "~/constants/routes";
 
+interface RouteParams {
+  params: {
+    id: string;
+  };
+}
+
 const EditQuestion = async ({ params }: RouteParams) => {
-  const { id } = await params;
+  const { id } = params;
   if (!id) return notFound();
 
   const session = await auth();
@@ -16,8 +22,10 @@ const EditQuestion = async ({ params }: RouteParams) => {
   const { data: question, success } = await getQuestion({ questionId: id });
   if (!success) return notFound();
 
-  if (question?.author.toString() !== session?.user?.id)
+  // Check if the current user is the author
+  if (question?.author?._id !== session?.user?.id) {
     redirect(ROUTES.QUESTION(id));
+  }
 
   return (
     <main>

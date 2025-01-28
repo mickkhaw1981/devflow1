@@ -35,6 +35,7 @@ const Metric = ({
           name={value.toString()}
           imageUrl={imgUrl}
           className="h-4 w-4"
+          noLink
         />
       ) : (
         <Image

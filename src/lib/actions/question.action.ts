@@ -1,6 +1,7 @@
 "use server";
 
 import mongoose, { Error, FilterQuery } from "mongoose";
+import { Session } from "next-auth";
 
 import Question, { IQuestionDoc } from "~/database/question.model";
 import TagQuestion from "~/database/tag-question.model";
@@ -223,12 +224,14 @@ export async function getQuestion(
 
   const result = validationResult as {
     params: { questionId: string };
-    session: null | { user: { id: string } };
+    session: Session | null;
   };
   const { questionId } = result.params;
 
   try {
-    const question = await Question.findById(questionId).populate("tags");
+    const question = await Question.findById(questionId)
+      .populate("tags")
+      .populate("author", "_id name image");
 
     if (!question) {
       throw new Error("Question not found");
