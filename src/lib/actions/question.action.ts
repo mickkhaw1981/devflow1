@@ -229,7 +229,12 @@ export async function getQuestion(
   const { questionId } = result.params;
 
   try {
-    const question = await Question.findById(questionId)
+    // Increment the "views" count, returning the updated document
+    const question = await Question.findByIdAndUpdate(
+      questionId,
+      { $inc: { views: 1 } },
+      { new: true }
+    )
       .populate("tags")
       .populate("author", "_id name image");
 
